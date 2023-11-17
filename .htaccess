@@ -1,0 +1,4 @@
+DirectoryIndex index.php index.html
+ErrorDocument 404 /212DWECProyectoDWEC/errors/404.html
+ErrorDocument 403 /212DWECProyectoDWEC/errors/403.html
+Redirect 301 /educa https://www.terra.com
