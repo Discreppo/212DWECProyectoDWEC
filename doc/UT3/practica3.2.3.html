@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Pascual Ferrero</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        main {
+            margin-top: 10%;
+        }
+
+        footer {
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Practica 3.1.3</h1>
+    </header>
+    <main>
+
+        <script>
+
+            function contarRepeticionesNumerosAleatorios() {
+                var mapNumeros = new Map(); //Declaración del map
+
+                //Inicializamos las claves y valores 
+                mapNumeros.set(1, 0);
+                mapNumeros.set(2, 0);
+                mapNumeros.set(3, 0);
+                mapNumeros.set(4, 0);
+                mapNumeros.set(5, 0);
+                mapNumeros.set(6, 0);
+                mapNumeros.set(7, 0);
+                mapNumeros.set(8, 0);
+                mapNumeros.set(9, 0);
+                mapNumeros.set(10, 0);
+
+                for (let i = 0; i < 10000; i++) {
+                    var numeroAleatorio = Math.floor(Math.random() * 10) + 1; //Calculamos el número aleatorio entre 1 y 10.
+                    if (mapNumeros.has(numeroAleatorio)) { //Comprobamos si el número ingresado esta almacenado
+                        mapNumeros.set(numeroAleatorio, mapNumeros.get(numeroAleatorio) + 1); // Si el número existe, sumamos 1 al valor de ese número
+                    } else {
+                        mapNumeros.set(numeroAleatorio, 1); //Si no esta almacenado, lo guardamos y lo inicializamos con valor 1
+                    }
+                }
+
+                return mapNumeros; //Devolvemos el mapa de números 
+            }
+
+            // Función para mostrar los resultados
+            function mostrarResultados(mapNumeros) {
+                mapNumeros.forEach((repeticiones, numero) => {
+                    document.write("El " + numero + " se a repetido: " + repeticiones + " veces.<br>");
+                });
+            }
+
+            const mapaResultados = contarRepeticionesNumerosAleatorios(); //Llamamos a la función para iniciar el ejercicio.
+            mostrarResultados(mapaResultados); //Llamamos a la función para mostrar los resultados.
+
+        </script>
+
+    </main>
+    <footer>
+        <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+        <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                target="_blank">GitHub</a></p>
+    </footer>
+</body>
+
+</html>

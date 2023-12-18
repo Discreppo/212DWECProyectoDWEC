@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejercicio 2</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ejercicio 2 </h1>
+
+    <button onclick="dameDatos()">Haz click aquí</button>
+    <script>
+
+
+
+        function mostrarFechaHora(dia = new Date().getDate(), mes = new Date().getMonth() + 1, año = new Date().getFullYear(),
+            horas = new Date().getHours(), minutos = new Date().getMinutes(), segundos = new Date().getSeconds()) {
+            const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const nombreMeses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+            const diaSemana = diasSemana[new Date(año, mes - 1, dia).getDay()];
+            const nombreMes = nombreMeses[mes - 1];
+
+            alert(`Hoy es ${diaSemana}, ${dia} de ${nombreMes} de ${año} y son las ${horas} horas, ${minutos} minutos y ${segundos} segundos.`);
+        }
+
+        
+        function dameDatos() {
+            var dia = prompt('dia:');
+            var mes = prompt('mes:');
+            var año = prompt('año:');
+            var horas = prompt('horas:');
+            var minutos = prompt('minutos:');
+            var segundos = prompt('segundos:');
+
+            if ((dia !== null && dia !== "") || (mes !== null && mes !== "") || (año !== null && año !== "") ||
+                (horas !== null && horas !== "") || (minutos !== null && minutos !== "") || (segundos !== null && segundos !== "")) {
+                mostrarFechaHora(dia, mes, año, horas, minutos, segundos);
+            } else {
+                mostrarFechaHora();
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>

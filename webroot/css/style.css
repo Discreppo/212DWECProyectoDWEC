@@ -21,6 +21,15 @@ body {
     background-attachment: fixed; /* Fija la imagen de fondo */
 }
 
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover{
+    color: red;
+}
+
 footer{
     bottom: 0;
     position: fixed;

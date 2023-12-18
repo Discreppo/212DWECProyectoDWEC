@@ -1,0 +1,77 @@
+< !DOCTYPE html>
+    <html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Oscar Pascual Ferrero</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background-color: #fff;
+            }
+
+            main {
+                margin-top: 10%;
+            }
+
+            footer {
+                bottom: 0;
+                text-align: center;
+                width: 100%;
+                background-color: lightgray;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Practica 3.1.2</h1>
+        </header>
+        <main>
+
+            <script>
+                // Función para cifrar un mensaje con una clave
+                function cifrarMensaje(mensaje, clave) {
+                    var mensajeCifrado = "";
+                    var j = 0;
+                    for (var i = 0; i < mensaje.length; i++) {
+
+                        var codigo = mensaje.charCodeAt(i);
+                        mensajeCifrado += String.fromCharCode(codigo + Number(clave.charAt(j)));
+                        j++;
+                        if (j === clave.length) j = 0;
+
+                    }
+                    return mensajeCifrado;
+                }
+
+
+                // Pedir al usuario un mensaje y una clave
+                var mensaje = prompt("Por favor, introduce un mensaje:");
+                var clave = prompt("Por favor, introduce una clave (números):");
+
+                // Cifrar el mensaje con la clave
+                var mensajeCifrado = cifrarMensaje(mensaje, clave);
+
+                // Mostrar el mensaje cifrado
+                document.write("<p>Mensaje original: " + mensaje + "</p>");
+                document.write("<p>Mensaje cifrado: " + mensajeCifrado + "</p>");
+            </script>
+
+        </main>
+        <footer>
+            <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+            <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                    target="_blank">GitHub</a></p>
+        </footer>
+    </body>
+
+    </html>

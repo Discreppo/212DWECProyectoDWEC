@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado</title>
+</head>
+
+<body>
+    <ol>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque ut nobis culpa! Nulla, soluta quae aliquam
+            ratione sequi at, recusandae nemo tenetur, iure labore amet illum omnis sunt quos dolor?</li>
+        <li>Repellat, obcaecati. Qui alias architecto recusandae corrupti possimus, tempore perferendis optio libero!
+            Quaerat dolores modi consectetur molestiae sint exercitationem! Illo eius laudantium doloremque vero
+            nesciunt sit odit quibusdam excepturi libero!</li>
+        <li>Dolor dolorem libero pariatur officiis velit accusantium fuga eligendi autem laboriosam repellendus,
+            corrupti ab eius qui optio nesciunt, amet neque deleniti alias fugiat odit quaerat. Sequi ipsa aspernatur
+            veniam dolorem?</li>
+        <li>Perferendis eligendi alias labore. Quaerat, adipisci. Cum similique voluptate nesciunt minus, at veritatis
+            dicta corrupti quod impedit, commodi saepe! Impedit iusto officia deleniti velit sunt minus incidunt ducimus
+            reprehenderit beatae!</li>
+        <li>Earum ratione laborum quisquam tempore perspiciatis ipsum iure cumque soluta dolorum molestiae reprehenderit
+            officiis officia qui a optio, facilis dolor iste ducimus temporibus distinctio excepturi vero? Nam tempore
+            nihil praesentium!</li>
+        <li>Quisquam voluptatibus dicta rem earum explicabo, temporibus asperiores rerum, corrupti alias repudiandae
+            fugit, non voluptates! Rem tenetur sequi, dolore, optio veritatis recusandae soluta, unde voluptate
+            temporibus velit itaque fuga veniam.</li>
+        <li>Pariatur, tempora nulla dolorum odit nam sequi modi quia accusamus. Aut expedita a cumque, ratione nobis
+            aliquam commodi culpa aliquid possimus facere voluptatem, recusandae quaerat enim dignissimos? Deserunt,
+            quasi voluptatibus?</li>
+        <li>Beatae incidunt, rerum molestias doloribus, dolorem mollitia quidem necessitatibus sint veniam inventore
+            totam porro sequi, placeat quisquam eaque optio quos labore quam fugit consectetur ut suscipit soluta.
+            Dolor, fugiat a!</li>
+        <li>Quis alias impedit sunt repellat sequi a mollitia nostrum esse. Accusamus porro ea expedita sit eligendi
+            totam. Rem magni tenetur excepturi esse eum, vero est molestiae, delectus consectetur ea veritatis.</li>
+    </ol>
+    <script>
+        function agregarTextoEnLinea() {
+            // Pedir al usuario un texto
+            var texto = prompt("Introduce un texto:");
+
+            // Validar que el usuario haya ingresado un texto
+            if (texto !== null && texto.trim() !== "") {
+                // Pedir al usuario el número de línea donde agregar el texto
+                var numeroLinea = parseInt(prompt("Introduce el número de línea donde quieres agregar el texto:"));
+
+                // Validar la entrada del usuario
+                if (!isNaN(numeroLinea) && numeroLinea >= 1) {
+                    // Obtener la lista ordenada (ol)
+                    var listaOrdenada = document.querySelector('ol');
+
+                    // Crear un nuevo elemento de lista (li)
+                    var nuevoElementoLista = document.createElement('li');
+
+                    // Crear un nuevo elemento de span para resaltar el texto en negrita
+                    var nuevoSpan = document.createElement('span');
+                    nuevoSpan.style.fontWeight = 'bold';
+
+                    // Crear un nuevo elemento de texto con el contenido ingresado por el usuario
+                    var nuevoTexto = document.createTextNode(texto);
+
+                    // Adjuntar el nuevo elemento de texto al elemento de span
+                    nuevoSpan.appendChild(nuevoTexto);
+
+                    // Adjuntar el elemento de span al nuevo elemento de lista
+                    nuevoElementoLista.appendChild(nuevoSpan);
+
+                    // Obtener el elemento de la lista en la posición indicada
+                    var elementoLista = listaOrdenada.children[numeroLinea - 1];
+
+                    // Insertar el nuevo elemento de la lista antes del elemento de la lista existente en la posición indicada
+                    listaOrdenada.insertBefore(nuevoElementoLista, elementoLista);
+                } else {
+                    alert("Número de línea inválido. Debe ser un número entero mayor o igual a 1.");
+                }
+            } else {
+                alert("Debes ingresar un texto.");
+            }
+        }
+
+        // Llamar a la función cuando se carga la página
+        window.onload = agregarTextoEnLinea;
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+< !DOCTYPE html>
+  <html lang="es">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Pascual Ferrero</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #fff;
+      }
+
+      main {
+        margin-top: 10%;
+      }
+
+      footer {
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+        background-color: lightgray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Practica 3.1.4</h1>
+    </header>
+    <main>
+
+      <script>
+
+        var palabras = [];
+
+        function pedirPalabras() {
+          let palabra = prompt("Ingrese una palabra (Presione Cancelar para detenerse): ");
+          if (palabra !== null) {
+            palabras.push(palabra);
+            pedirPalabras();
+          }
+        }
+
+        function mostrarMenu() {
+          while (true) {
+            const opcion = prompt(`Menú de opciones:
+        1) Ver primera palabra insertada
+        2) Ver última palabra insertada
+        3) Ver todas las palabras
+        4) Ver la palabra más larga
+        5) Ver la palabra más corta
+        6) Número de palabras insertadas
+        7) Buscar una palabra
+        8) Borrar duplicados
+        9) Salir
+        Ingrese el número de la opción:`);
+
+            switch (opcion) {
+              case "1":
+                if (palabras.length > 0) {
+                  alert(`Primera palabra insertada: ${palabras[0]}`);
+                } else {
+                  alert("No se han insertado palabras.");
+                }
+                break;
+              case "2":
+                if (palabras.length > 0) {
+                  alert(`Última palabra insertada: ${palabras[palabras.length - 1]}`);
+                } else {
+                  alert("No se han insertado palabras.");
+                }
+                break;
+              case "3":
+                if (palabras.length > 0) {
+                  alert(`Todas las palabras insertadas: ${palabras.join(", ")}`);
+                } else {
+                  alert("No se han insertado palabras.");
+                }
+                break;
+              case "4":
+                if (palabras.length > 0) {
+                  const palabraMasLarga = palabras.reduce((a, b) => (a.length > b.length ? a : b));
+                  alert(`Palabra más larga: ${palabraMasLarga}`);
+                } else {
+                  alert("No se han insertado palabras.");
+                }
+                break;
+              case "5":
+                if (palabras.length > 0) {
+                  const palabraMasCorta = palabras.reduce((a, b) => (a.length < b.length ? a : b));
+                  alert(`Palabra más corta: ${palabraMasCorta}`);
+                } else {
+                  alert("No se han insertado palabras.");
+                }
+                break;
+              case "6":
+                alert(`Número de palabras insertadas: ${palabras.length}`);
+                break;
+              case "7":
+                const palabraBuscar = prompt("Ingrese la palabra que desea buscar:");
+                const encontrada = palabras.includes(palabraBuscar);
+                if (encontrada) {
+                  alert(`La palabra "${palabraBuscar}" fue encontrada.`);
+                } else {
+                  alert(`La palabra "${palabraBuscar}" no fue encontrada.`);
+                }
+                break;
+              case "8":
+                const palabrasSinDuplicados = new Set(palabras);
+                palabras = [...palabrasSinDuplicados];
+                alert(`Palabras sin duplicados: ${palabras.join(", ")}`);
+                break;
+              case "9":
+                return;
+              default:
+                alert("Opción no válida. Por favor, elija una opción válida.");
+                break;
+            }
+          }
+        }
+
+        // Llamamos a las funciones
+        pedirPalabras();
+        mostrarMenu();
+
+      </script>
+
+    </main>
+    <footer>
+      <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+      <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+          target="_blank">GitHub</a></p>
+    </footer>
+  </body>
+
+  </html>

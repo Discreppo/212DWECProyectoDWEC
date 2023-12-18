@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen Dinámica</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #barInfo {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <img id="dynamicImage" src="" alt="Imagen Dinámica">
+    <div id="barInfo"></div>
+
+    <script>
+        function updateImage() {
+            var screenWidth = window.innerWidth;
+            var screenHeight = window.innerHeight;
+
+            // Cambiar la imagen según el tamaño de la pantalla
+            var imageUrl = (screenWidth > 600 && screenHeight > 400) ? 'webroot/images/imagen_grande.jpg' : 'webroot/images/imagen_pequena.jpg';
+
+            document.getElementById('dynamicImage').src = imageUrl;
+
+            // Obtener las dimensiones de la barra de tareas
+            var barWidth = window.screen.width;
+            var barHeight = screen.height - screen.availHeight;
+
+            // Mostrar la información de la barra de tareas
+            document.getElementById('barInfo').innerText = 'Barra de tareas: ' + barWidth + ' px de ancho, ' + barHeight + ' px de alto';
+        }
+
+        // Llamar a la función al cargar la página y al cambiar el tamaño de la ventana
+        window.addEventListener('load', updateImage);
+        window.addEventListener('resize', updateImage);
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Pascual Ferrero</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        main {
+            margin-top: 10%;
+        }
+
+        footer {
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Practica 3.1.1</h1>
+    </header>
+    <main>
+
+        <script>
+            
+            //Entrada de datos parseada a enteros
+            var numFibonacci = parseInt(prompt("Introduce un entero positivo: "));
+
+            //Declaración de variables
+            var pos1 = 0;
+            var pos2 = 1;
+            var acumulador = 0;
+            //Bucle para sumar los numeros hasta el introducido por teclado
+            for (let i = 2; i <= numFibonacci; i++) {
+                acumulador = pos1 + pos2;
+                pos1 = pos2;
+                pos2 = acumulador;
+            }
+
+            document.write(" Fibonacci ITERATIVA - posición " + numFibonacci + " es: " + pos2 + "<br>");
+
+            //Función recursiva
+            function fibonacci(numFibonacci) {
+                if (numFibonacci <= 1) {
+                    return numFibonacci;
+                } else {
+                    return fibonacci(numFibonacci - 1) + fibonacci(numFibonacci - 2);
+                }
+            }
+
+            document.write(" Fibonacci RECURSIVA - posición " + numFibonacci + " es: " + fibonacci(numFibonacci));
+
+
+        </script>
+
+    </main>
+    <footer>
+        <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+        <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                target="_blank">GitHub</a></p>
+    </footer>
+</body>
+
+</html>

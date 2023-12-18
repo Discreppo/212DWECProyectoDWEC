@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Pascual Ferrero</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        main {
+            margin-top: 10%;
+        }
+
+        footer {
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Practica 3.1.2</h1>
+    </header>
+    <main>
+
+        <script>
+
+            var arrayPalabras = [];
+            while (true) {
+                const palabra = prompt("Introduzca una palabra:");
+
+                if (palabra === null || palabra.trim() === "") {
+                    break; // Salir del bucle si el usuario presiona "Cancelar" o deja la entrada vacía
+                }
+                const palabraMinusculas = palabra.toLowerCase(); // Pasamos la palabra a minúsculas
+                arrayPalabras.push(palabraMinusculas);
+            }
+
+            // Función para contar repeticiones de palabras
+            function contarRepeticionesDePalabras(arrayPalabras) {
+                const mapaPalabras = new Map();
+
+                for (let i = 0; i < arrayPalabras.length; i++) {
+                    if (mapaPalabras.has(arrayPalabras[i])) {
+                        mapaPalabras.set(arrayPalabras[i], mapaPalabras.get(arrayPalabras[i]) + 1);
+                    } else {
+                        mapaPalabras.set(arrayPalabras[i], 1);
+                    }
+                }
+
+                if (mapaPalabras.size > 0) {
+                    mapaPalabras.forEach((repeticiones, palabra) => {
+                        document.write("La palabra " + palabra + " se ha repetido: " + repeticiones + " veces.<br>");
+                    });
+                } else {
+                    document.write("Array vacío.");
+                }
+            }
+
+            contarRepeticionesDePalabras(arrayPalabras); //Llamamos a la función para mostrar los resultados.
+
+
+        </script>
+
+    </main>
+    <footer>
+        <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+        <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                target="_blank">GitHub</a></p>
+    </footer>
+</body>
+
+</html>
