@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejercicio 3</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ejercicio 3 </h1>
+
+    <!-- Agrega elementos de entrada para el año y el mes -->
+    <label for="inputAnio">Año:</label>
+    <input type="number" id="inputAnio" min="1" placeholder="Ingrese el año">
+
+    <label for="inputMes">Mes (1-12):</label>
+    <input type="number" id="inputMes" min="1" max="12" placeholder="Ingrese el mes">
+
+    <button onclick="mostrarCalendario()">Mostrar Calendario</button>
+
+    <!-- Elemento donde se mostrará el calendario -->
+    <div id="calendarioContainer"></div>
+    <script>
+        function mostrarCalendario() {
+            // Obtener los valores del año y el mes desde los elementos de entrada
+            const año = document.getElementById("inputAnio").value;
+            const mes = document.getElementById("inputMes").value;
+
+            // Validar que se ingresaron valores válidos
+            if (año === "" || mes === "") {
+                alert("Ingrese un año y un mes válidos.");
+                return;
+            }
+
+            let primerDia = new Date(año, mes - 1, 1).getDay();
+            primerDia = (primerDia === 0) ? 6 : primerDia - 1;
+            const ultimoDia = new Date(año, mes, 0).getDate();
+
+            // Crear una tabla HTML
+            let tablaHTML = '<table>';
+            tablaHTML += '<tr>';
+            const diasSemana = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+            for (let i = 0; i < 7; i++) {
+                tablaHTML += `<th>${diasSemana[i]}</th>`;
+            }
+            tablaHTML += '</tr>';
+            let diaActual = 1;
+
+            for (let i = 0; i < 6; i++) {
+                let fila = '<tr>';
+                for (let j = 0; j < 7; j++) {
+                    if ((i === 0 && j < primerDia) || diaActual > ultimoDia) {
+                        fila += '<td></td>';
+                    } else {
+                        fila += `<td>${diaActual < 10 ? ' ' : ''}${diaActual}</td>`;
+                        diaActual++;
+                    }
+                }
+                fila += '</tr>';
+                tablaHTML += fila;
+            }
+
+            tablaHTML += '</table>';
+
+            // Mostrar la tabla en el contenedor designado
+            document.getElementById("calendarioContainer").innerHTML = tablaHTML;
+        }
+    </script>
+
+
+</body>
+
+</html>

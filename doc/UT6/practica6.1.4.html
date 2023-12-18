@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Control de Velocidad</title>
+</head>
+
+<body>
+    <div id="velocidadDisplay">Velocidad 0</div>
+
+    <script>
+        let velocidad = 0;
+        const velocidadDisplay = document.getElementById('velocidadDisplay');
+
+        document.addEventListener('keydown', function (event) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    aumentarVelocidad();
+                    break;
+                case 'ArrowDown':
+                    disminuirVelocidad();
+                    break;
+            }
+        });
+
+        function aumentarVelocidad() {
+            velocidad = Math.min(120, velocidad + 1);
+            actualizarVelocidadDisplay();
+        }
+
+        function disminuirVelocidad() {
+            velocidad = Math.max(0, velocidad - 1);
+            actualizarVelocidadDisplay();
+        }
+
+        function actualizarVelocidadDisplay() {
+            velocidadDisplay.textContent = 'Velocidad ' + velocidad;
+        }
+
+    </script>
+</body>
+
+</html>

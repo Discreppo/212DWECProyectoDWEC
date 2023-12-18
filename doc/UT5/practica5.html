@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Palabras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lista de Palabras</h1>
+    <ul id="wordList"></ul>
+
+    <script>
+        const words = ["Carlos", "Borja", "Erika", "Rebeca", "Ismael", "Oscar", "Alvaro", "Alberto", "Melón", "Mercedes"];
+        let index = 0;
+
+        function displayWord() {
+            if (index < words.length) {
+                const ul = document.getElementById("wordList");
+                const li = document.createElement("li");
+                li.textContent = words[index];
+                ul.appendChild(li);
+                index++;
+                setTimeout(displayWord, 1000);
+            } else {
+                setTimeout(promptSort, 3000);
+            }
+        }
+
+        function promptSort() {
+            const sort = confirm("¿Quieres ordenar la lista alfabéticamente?");
+            if (sort) {
+                words.sort();
+                displaySortedWords();
+            }
+        }
+
+        function displaySortedWords() {
+            const ul = document.getElementById("wordList");
+            ul.innerHTML = ""; // Limpiar la lista actual
+
+            for (const word of words) {
+                const li = document.createElement("li");
+                li.textContent = word;
+                ul.appendChild(li);
+            }
+        }
+
+        // Iniciar la visualización de palabras
+        displayWord();
+    </script>
+</body>
+
+</html>

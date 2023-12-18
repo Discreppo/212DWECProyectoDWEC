@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capa Interactiva</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .capa {
+            position: absolute;
+            left: 25%;
+            /* 50% del ancho de la ventana */
+            top: 25%;
+            /* 50% del alto de la ventana */
+            width: 50%;
+            height: 50%;
+            border: 2px solid #000;
+            /* Borde inicial */
+            background-color: #fff;
+            /* Color de fondo inicial */
+        }       
+
+    </style>
+</head>
+
+<body>
+    <div id="capa" class="capa"></div>
+    <script>
+        const capa = document.getElementById('capa');
+
+        capa.addEventListener('mousedown', (event) => {
+            if (event.button === 0) {
+                capa.style.backgroundColor = '#ff0000'; /* Rojo con clic izquierdo */
+            } else if (event.button === 2) {
+                capa.style.backgroundColor = '#0000ff'; /* Azul con clic derecho */
+            }
+        });
+
+        capa.addEventListener('mouseup', () => {
+            capa.style.backgroundColor = '#00ff00'; /* Quitar color al soltar el botón */
+        });
+        
+        capa.addEventListener('contextmenu', (event) => {
+            event.preventDefault(); /* Evitar el menú del clic derecho */
+        });
+
+        capa.addEventListener('mouseover', (event) => {
+            capa.style.backgroundColor = '#00ff00'; /* Verde al pasar el ratón */
+        });
+
+        capa.addEventListener('mouseout', (event) => {
+            capa.style.backgroundColor = '#fff'; /* Blanco al quitar el ratón */
+        });
+    </script>
+</body>
+
+</html>

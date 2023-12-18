@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ejercicio 4</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ejercicio 4 </h1>
+
+    
+    <script>
+
+        function generarFechaNacimiento() {
+            const inicio = new Date(1980, 0, 1).getTime();
+            const fin = new Date(2023, 11, 31).getTime();
+            const fechaAleatoria = new Date(inicio + Math.random() * (fin - inicio));
+            return fechaAleatoria;
+        }
+
+        function generarMapaPersonas() {
+            const mapaPersonas = new Map();
+
+            for (let i = 1; i <= 100; i++) {
+                const fechaNacimiento = generarFechaNacimiento();
+                mapaPersonas.set(i, fechaNacimiento);
+            }
+
+            return mapaPersonas;
+        }
+
+        function obtenerPersonasPorMes(mapaPersonas, mesBuscado) {
+            const personasCumpleMes = [];
+
+            for (const [clave, fechaNacimiento] of mapaPersonas) {
+                const mesNacimiento = fechaNacimiento.getMonth() + 1; // Meses en JavaScript van de 0 a 11
+                if (mesNacimiento === mesBuscado) {
+                    personasCumpleMes.push(clave);
+                }
+            }
+
+            return personasCumpleMes;
+        }
+
+        // Generar el mapa de personas
+        const mapaPersonas = generarMapaPersonas();
+
+        // Solicitar al usuario que ingrese un mes (1-12)
+        const mesIngresado = prompt("Ingrese un mes (1-12):");
+        const mesBuscado = parseInt(mesIngresado);
+
+        // Verificar si el mes ingresado es válido
+        if (mesBuscado >= 1 && mesBuscado <= 12) {
+            // Obtener personas que cumplen años en el mes ingresado
+            const personasCumpleMes = obtenerPersonasPorMes(mapaPersonas, mesBuscado);
+
+            // Mostrar resultados
+            if (personasCumpleMes.length > 0) {
+                console.log(`Personas que cumplen años en el mes ${mesBuscado}:`);
+                for (const persona of personasCumpleMes) {
+                    console.log(`Persona ${persona}: ${mapaPersonas.get(persona).toLocaleDateString()}`);
+                }
+            } else {
+                console.log(`No hay personas que cumplan años en el mes ${mesBuscado}.`);
+            }
+        } else {
+            console.log("Mes ingresado no válido. Por favor, ingrese un número entre 1 y 12.");
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

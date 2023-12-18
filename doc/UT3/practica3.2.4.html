@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Pascual Ferrero</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        main {
+            margin-top: 10%;
+        }
+
+        footer {
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Practica 3.1.4</h1>
+    </header>
+    <main>
+
+        <script>
+            var mapMarcasCoche = new Map(); //Declaro el mapa
+
+            //Inicializo las claves y valores 
+            mapMarcasCoche.set('1111BCD', 'Seat');
+            mapMarcasCoche.set('2222DEF', 'Audi');
+            mapMarcasCoche.set('3333FGH', 'Mercedes');
+            mapMarcasCoche.set('4444HIJ', 'Seat');
+            mapMarcasCoche.set('5555JKL', 'Mercedes');
+            mapMarcasCoche.set('6666LMN', 'Seat');
+
+            function invertirMapa(mapMarcasCoche) {
+                var mapInvertido = new Map();
+                mapMarcasCoche.forEach((valor, clave) => {
+                    if (!mapInvertido.has(valor)) {
+                        mapInvertido.set(valor, [clave]);
+                    } else {
+                        mapInvertido.get(valor).push(clave);
+                    }
+                });
+                return mapInvertido;
+            }
+
+            // Función para mostrar los resultados
+            function mostrarResultados(mapInvertido) {
+                mapInvertido.forEach((valor, clave) => {
+                    document.write("<tr><td>" + valor + "</td><td>" + clave + "</td></tr>");
+                });
+            }
+        </script>
+        <div class="mapNormal">
+            <h1 style='background-color: #7f7f7f;color: white;'>MAPA NORMAL</h1>
+            <table>
+                <tr>
+                    <th>CLAVE</th>
+                    <th>VALOR</th>
+                </tr>
+                <script>
+                    mostrarResultados(mapMarcasCoche); //Llamamos a la función para mostrar el mapa antes de invertirlo.
+                </script>
+            </table>
+        </div>
+        <div class="mapInvertido">
+            <h1 style='background-color: #7f7f7f;color: white;'>MAPA INVERTIDO</h1>
+            <table>
+                <tr>
+                    <th>CLAVE</th>
+                    <th>VALOR</th>
+                </tr>
+                <script>
+                    const mapaInvertido = invertirMapa(mapMarcasCoche); //Llamamos a la función para iniciar el ejercicio.
+                    mostrarResultados(mapaInvertido); //Llamamos a la función para mostrar los resultados.
+                </script>
+            </table>
+        </div>
+
+
+
+    </main>
+    <footer>
+        <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+        <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                target="_blank">GitHub</a></p>
+    </footer>
+</body>
+
+</html>

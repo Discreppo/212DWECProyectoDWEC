@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ejercicio 1</title>
+  <style>
+    * {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Ejercicio 1 </h1>
+
+  <script>   
+    function obtenerDiaSemana(fecha) {
+      const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+      return diasSemana[new Date(fecha).getDay()];
+    }
+
+    function mostrarDiasCumpleanos() {
+      const fechaNacimiento = prompt("Ingrese su fecha de nacimiento (YYYY-MM-DD):");
+      const fechaNacimientoObj = new Date(fechaNacimiento);
+
+      console.log(`Naciste un ${obtenerDiaSemana(fechaNacimientoObj)}.`);
+
+      const hoy = new Date();
+      for (let year = fechaNacimientoObj.getFullYear(); year <= hoy.getFullYear(); year++) {
+        fechaNacimientoObj.setFullYear(year);
+        console.log(`Cumpleaños en ${year}: ${obtenerDiaSemana(fechaNacimientoObj)}`);
+      }
+    }
+
+    mostrarDiasCumpleanos();
+
+  </script>
+
+</body>
+
+</html>

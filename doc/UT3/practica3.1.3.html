@@ -1,0 +1,119 @@
+< !DOCTYPE html>
+    <html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Oscar Pascual Ferrero</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background-color: #fff;
+            }
+
+            main {
+                margin-top: 10%;
+            }
+
+            footer {
+                bottom: 0;
+                text-align: center;
+                width: 100%;
+                background-color: lightgray;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Practica 3.1.3</h1>
+        </header>
+        <main>
+
+            <script>
+                /*segun alberto, tener una variable con "0123456789" y otra con "abcdefghijklmñopqrstuvwxyz", pedimos el nombre
+*/
+
+                function esNombreValido(nombre) {
+                    // Verificar si el nombre contiene solo letras minúsculas y números
+                    const caracteres = "0123456789abcdefghijklmnñopqrstuvwxyz";
+                    for (let i = 0; i < nombre.length; i++) {
+                        if (caracteres.indexOf(nombre.charAt(i)) === -1) {
+                            return false;
+                        }
+
+                    }
+                    return true;
+                }
+
+                function esContrasenaValida(contrasena) {
+                    // Verificar si la contraseña cumple con los requisitos
+                    var contieneMayuscula = false;
+                    var contieneMinuscula = false;
+                    var contieneNumero = false;
+                    var contieneCaracterEspecial = false;
+                    const mayuscula = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+                    const minuscula = "abcdefghijklmnñopqrstuvwxyz";
+                    const numero = "0123456789";
+
+                    for (var i = 0; i < contrasena.length; i++) {
+                        var caracter = contrasena[i];
+                        if (mayuscula.includes(caracter)) {
+                            contieneMayuscula = true;
+                        } else if (minuscula.includes(caracter)) {
+                            contieneMinuscula = true;
+                        } else if (numero.includes(caracter)) {
+                            contieneNumero = true;
+                        } else {
+                            contieneCaracterEspecial = true;
+                        }
+                    }
+
+                    return contieneMayuscula && contieneMinuscula && contieneNumero && contieneCaracterEspecial;
+                }
+
+                // Pedir al usuario un nombre de usuario
+                var nombreUsuario = prompt("Por favor, introduce tu nombre de usuario:");
+
+
+                if (nombreUsuario === null) {
+                    alert("La aplicación ha sido cancelada.");
+                } else {
+                    while (!esNombreValido(nombreUsuario)) {
+                        alert("El nombre de usuario no cumple con los requisitos. Debe contener solo letras minúsculas y números.");
+                        nombreUsuario = prompt("Por favor, introduce tu nombre de usuario:");
+                    }
+
+                    // Pedir al usuario una contraseña
+                    var contrasena = prompt("Por favor, introduce tu contraseña:");
+
+                    if (contrasena === null) {
+                        alert("La aplicación ha sido cancelada.");
+                    } else {
+                        while (!esContrasenaValida(contrasena)) {
+                            alert("La contraseña no cumple con los requisitos. Debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.");
+                            contrasena = prompt("Por favor, introduce tu contraseña:");
+                        }
+                        alert("La información se ha almacenado correctamente.");
+
+                    }
+
+                }
+            </script>
+
+        </main>
+        <footer>
+            <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+            <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                    target="_blank">GitHub</a></p>
+        </footer>
+    </body>
+
+    </html>

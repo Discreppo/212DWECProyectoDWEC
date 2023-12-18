@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar y Soltar</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .capa {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        .arrastrable {
+            background-color: yellow;
+            opacity: 1;
+            cursor: grab;
+        }
+
+        .arrastrando {
+            opacity: 0.5;
+        }
+
+        .destino {
+            background-color: white;
+        }
+
+        .sobre-destino {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="capa1" draggable="true" class="capa arrastrable">Soy arrastrable</div>
+    <div id="capa2" class="capa destino">Soy el destino</div>
+
+    <script>
+        const capa1 = document.getElementById('capa1');
+        const capa2 = document.getElementById('capa2');
+
+        capa1.addEventListener('dragstart', function (event) {
+            capa1.classList.add('arrastrando');
+        });
+
+        capa2.addEventListener('dragenter', function (event) {
+            capa2.classList.add('sobre-destino');
+        });
+
+        capa2.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
+
+        capa2.addEventListener('dragleave', function (event) {
+            event.preventDefault();
+            capa2.classList.remove('sobre-destino');
+        });
+
+        capa2.addEventListener('drop', function (event) {
+            event.preventDefault();
+            capa2.classList.remove('sobre-destino');
+
+            // Verifica si el elemento arrastrado tiene la clase 'arrastrando'
+            if (capa1.classList.contains('arrastrando')) {
+                capa1.style.display = 'none';
+                capa2.textContent = '¡Lo has logrado!';
+            }
+        });
+
+        capa1.addEventListener('dragend', function (event) {
+            capa1.classList.remove('arrastrando');
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="Granja.js"></script>
+  <script src="Animal.js"></script>
+  <script src="Vaca.js"></script>
+  <script src="Gallina.js"></script>
+  <title>Granja</title>
+  <style>    
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .menu {
+      background-color: #f0f0f0;
+      padding: 10px;
+    }
+    .menu ul {
+      list-style: none;
+      padding: 0;
+    }
+    .menu ul li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Granja</h1>
+
+  <div class="menu">
+    <h2>Menú</h2>
+    <script>
+      const miGranja = new Granja("A1234567890Z");
+    </script>
+    <ul>
+      <li><button onclick="miGranja.toString()">1. Info. Granja</button></li>
+      <li><button onclick="miGranja.comprarVacas(prompt('¿Cuantas vacas?'))">2. Comprar Vacas</button></li>
+      <li><button onclick="miGranja.comprarGallinas(prompt('¿Cuantas gallinas?'))">3. Comprar Gallinas</button></li>
+      <li><button onclick="miGranja.venderVacas(prompt('¿Cuantas vacas?'))">4. Vender Vacas</button></li>
+      <li><button onclick="miGranja.venderGallinas(prompt('¿Cuantas gallinas?'))">5. Vender Gallinas</button></li>
+      <li><button onclick="miGranja.darComerVacas(prompt('¿Cuantos kilos?'))">6. Dar de comer Vacas</button></li>
+      <li><button onclick="miGranja.darComerGallinas(prompt('¿Cuantos kilos?'))">7. Dar de comer Gallinas</button></li>
+      <li><button onclick="miGranja.ordeñarVacas()">8. Ordeñar</button></li>
+      <li><button onclick="miGranja.verAnimalesEnfermos()">9. Ver animales enfermos</button></li>
+      <li><button onclick="miGranja.curarAnimales()">10. Curar</button></li>
+    </ul>
+  </div>
+
+  <div id="resultado"></div>
+
+  
+</body>
+</html>

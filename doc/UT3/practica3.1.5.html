@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #contenedor {
+            width: 100%;
+            text-align: center;
+            width: 500px;
+            margin: auto;
+        }
+
+        .celda {
+            display: inline-block;
+            outline: 1px solid black;
+            width: 50px;
+            height: 50px;
+        }
+
+        .ocupada {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const TAM_COLUMNAS = 10;
+        const TAM_FILAS = 10;
+        var tablero = new Array(TAM_FILAS);
+        var cont2 = 0;
+        var cont1 = 0;
+
+        //iniciar tablero
+        for (let i = 0; i < TAM_FILAS; i++) {
+            tablero[i] = new Array(TAM_COLUMNAS);
+            for (let j = 0; j < TAM_COLUMNAS; j++) {
+                tablero[i][j] = false;
+            }
+        }
+        //Calcular direccion y posicion aleatoria
+        var direccion = (Math.random() < 0.5 ? 'horizontal' : 'vertical');
+        var filas2 = Math.floor(Math.random() * 10);
+        var columnas2 = Math.floor(Math.random() * 10);
+
+        //Comprobar tablero
+        function comprobarAdyacentesLibres2() {
+            for (let i = -1; i <= 2; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    let fila, columna;
+
+                    if (direccion == 'horizontal') {
+                        fila = filas2 + j;
+                        columna = columnas2 + i;
+                    } else {
+                        fila = filas2 + i;
+                        columna = columnas2 + j;
+                    }
+                    if (fila >= 0 && fila < 9 && columna >= 0 && columna < 9) {
+                        if (tablero[fila][columna] === true) {
+                            return false;
+                        }
+                    }
+
+                }
+            }
+            return true;
+        }
+        function comprobarAdyacentesLibres1() {
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    let fila, columna;
+
+                    if (direccion == 'horizontal') {
+                        fila = filas2 + j;
+                        columna = columnas2 + i;
+                    } else {
+                        fila = filas2 + i;
+                        columna = columnas2 + j;
+                    }
+                    if (fila >= 0 && fila < 9 && columna >= 0 && columna < 9) {
+                        if (tablero[fila][columna] === true) {
+                            return false;
+                        }
+                    }
+
+                }
+            }
+            tablero[filas2][columnas2] = true;       
+            return true;
+        }
+
+        //Colocar barcos
+        /*cambiar para adaptar a nuestro juego*/
+        function colocarBarco(x, y, direccion) {
+            if (direccion === 'horizontal') {
+                for (let i = x; i < x + 2; i++) {
+                    tablero[y][i] = true;
+                }
+            } else {
+                for (let i = y; i < y + 2; i++) {
+                    tablero[i][x] = true;
+                }
+            }
+        }
+
+        //Comprueba y coloca
+        do {
+            
+            if (comprobarAdyacentesLibres2() && ((direccion=='horizontal'&&columnas2<9) || (direccion=='vertical'&&filas2<9))) {
+
+                colocarBarco(columnas2, filas2, direccion)
+                cont2++;
+                direccion = (Math.random() < 0.5 ? 'horizontal' : 'vertical');
+                filas2 = Math.floor(Math.random() * 8);
+                columnas2 = Math.floor(Math.random() * 8);                
+            }else{
+                
+                direccion = (Math.random() < 0.5 ? 'horizontal' : 'vertical');
+                filas2 = Math.floor(Math.random() * 8);
+                columnas2 = Math.floor(Math.random() * 8);
+            }
+        } while (cont2 < 2);
+        do {
+            
+            if (comprobarAdyacentesLibres1()) {                
+                cont1++;
+                direccion = (Math.random() < 0.5 ? 'horizontal' : 'vertical');
+                filas2 = Math.floor(Math.random() * 8);
+                columnas2 = Math.floor(Math.random() * 8);                
+            }else{
+                
+                direccion = (Math.random() < 0.5 ? 'horizontal' : 'vertical');
+                filas2 = Math.floor(Math.random() * 8);
+                columnas2 = Math.floor(Math.random() * 8);
+            }
+        } while (cont1 < 2);
+        
+        //Dibujo del tablero
+        document.write("<div id='contenedor'>")
+        for (let i = 0; i < TAM_FILAS; i++) {
+            for (let j = 0; j < TAM_COLUMNAS; j++) {
+                if (tablero[i][j]) {//hay barco en esta celda
+                    document.write("<div class='celda ocupada'></div>");
+                }
+                else {
+                    document.write("<div class='celda'></div>");
+                }
+            }
+        }
+        document.write("</div>")
+
+
+    </script>
+
+</body>
+
+</html>

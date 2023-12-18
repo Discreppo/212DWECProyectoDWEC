@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcar Palabras</title>
+</head>
+
+<body>
+    
+    <div id="contenido">
+        <ol>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque ut nobis culpa! Nulla, soluta quae
+                aliquam
+                ratione sequi at, recusandae nemo tenetur, iure labore amet illum omnis sunt quos dolor?</li>
+            <li>Repellat, obcaecati. Qui alias architecto recusandae corrupti possimus, tempore perferendis optio
+                libero!
+                Quaerat dolores modi consectetur molestiae sint exercitationem! Illo eius laudantium doloremque vero
+                nesciunt sit odit quibusdam excepturi libero!</li>
+            <li>Dolor dolorem libero pariatur officiis velit accusantium fuga eligendi autem laboriosam repellendus,
+                corrupti ab eius qui optio nesciunt, amet neque deleniti alias fugiat odit quaerat. Sequi ipsa
+                aspernatur
+                veniam dolorem?</li>
+            <li>Perferendis eligendi alias labore. Quaerat, adipisci. Cum similique voluptate nesciunt minus, at
+                veritatis
+                dicta corrupti quod impedit, commodi saepe! Impedit iusto officia deleniti velit sunt minus incidunt
+                ducimus
+                reprehenderit beatae!</li>
+            <li>Earum ratione laborum quisquam tempore perspiciatis ipsum iure cumque soluta dolorum molestiae
+                reprehenderit
+                officiis officia qui a optio, facilis dolor iste ducimus temporibus distinctio excepturi vero? Nam
+                tempore
+                nihil praesentium!</li>
+            <li>Quisquam voluptatibus dicta rem earum explicabo, temporibus asperiores rerum, corrupti alias repudiandae
+                fugit, non voluptates! Rem tenetur sequi, dolore, optio veritatis recusandae soluta, unde voluptate
+                temporibus velit itaque fuga veniam.</li>
+            <li>Pariatur, tempora nulla dolorum odit nam sequi modi quia accusamus. Aut expedita a cumque, ratione nobis
+                aliquam commodi culpa aliquid possimus facere voluptatem, recusandae quaerat enim dignissimos? Deserunt,
+                quasi voluptatibus?</li>
+            <li>Beatae incidunt, rerum molestias doloribus, dolorem mollitia quidem necessitatibus sint veniam inventore
+                totam porro sequi, placeat quisquam eaque optio quos labore quam fugit consectetur ut suscipit soluta.
+                Dolor, fugiat a!</li>
+            <li>Quis alias impedit sunt repellat sequi a mollitia nostrum esse. Accusamus porro ea expedita sit eligendi
+                totam. Rem magni tenetur excepturi esse eum, vero est molestiae, delectus consectetur ea veritatis.</li>
+        </ol>
+    </div>
+
+    <script>
+        // Función para marcar todas las apariciones de una palabra
+        function marcarPalabra(palabra) {
+            // Obtener el contenido del elemento con id 'contenido'
+            var contenidoElement = document.getElementById('contenido');
+            var contenido = contenidoElement.innerHTML;
+
+            // Utilizar una expresión regular para buscar y reemplazar la palabra
+            var expresionRegular = new RegExp(palabra, 'gi');
+            contenido = contenido.replace(expresionRegular, '<span style="font-weight: bold;">$&</span>');
+
+            // Actualizar el contenido del elemento
+            contenidoElement.innerHTML = contenido;
+        }
+
+
+        // Pedir al usuario una palabra
+        var palabraUsuario = prompt("Introduce una palabra:");
+
+        // Validar la entrada del usuario
+        if (palabraUsuario) {
+            // Llamar a la función recursiva para recorrer el DOM y marcar la palabra
+            marcarPalabra(palabraUsuario);
+        } else {
+            alert("No se introdujo una palabra.");
+        }
+    </script>
+</body>
+
+</html>

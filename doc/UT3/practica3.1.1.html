@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Pascual Ferrero</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        main {
+            margin-top: 10%;
+        }
+
+        footer {
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Practica 3.1.1</h1>
+    </header>
+    <main>
+
+        <script>
+            // Pedir una frase al usuario
+            var frase = prompt("Por favor, introduce una frase:");
+
+            // Dividir la frase en palabras
+            var palabras = frase.split(' ');
+
+            // Crear un array para almacenar las palabras con la primera letra en mayúsculas
+            var palabrasMayusculas = [];
+
+            // Recorrer todas las palabras y convertir la primera letra a mayúsculas
+            for (var i = 0; i < palabras.length; i++) {
+                var palabra = palabras[i];
+                var primeraLetraMayuscula = palabra.charAt(0).toUpperCase() + palabra.slice(1);
+                palabrasMayusculas.push(primeraLetraMayuscula);
+            }
+
+            // Unir las palabras con la primera letra en mayúsculas para formar la nueva frase
+            var nuevaFrase = palabrasMayusculas.join(' ');
+
+            // Mostrar la nueva frase en la página
+            document.write("<p>Frase original: " + frase + "</p>");
+            document.write("<p>Frase con la primera letra de cada palabra en mayúsculas: " + nuevaFrase + "</p>");
+        </script>
+
+    </main>
+    <footer>
+        <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+        <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                target="_blank">GitHub</a></p>
+    </footer>
+</body>
+
+</html>

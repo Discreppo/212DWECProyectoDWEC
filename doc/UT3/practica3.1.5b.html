@@ -1,0 +1,158 @@
+< !DOCTYPE html>
+    <html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Oscar Pascual Ferrero</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background-color: #fff;
+            }
+
+            main {
+                margin-top: 10%;
+            }
+
+            footer {
+                bottom: 0;
+                text-align: center;
+                width: 100%;
+                background-color: lightgray;
+            }
+
+            div {
+                width: 330px;
+            }
+
+            .celda {
+                width: 30px;
+                height: 30px;
+                border: 1px solid black;
+                display: inline-block;
+            }
+
+            .barco {
+                background-color: blue;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Practica 3.1.5</h1>
+        </header>
+        <main>
+            <div id="tablero"></div>
+            <script>
+                const tamanoTablero = 10;
+                const tablero = new Array(tamanoTablero).fill().map(() => new Array(tamanoTablero).fill(0));
+
+                const tamanosBarcos = [2, 2, 2, 1, 1];
+
+                function obtenerDireccionAleatoria() {
+                    return Math.random() < 0.5 ? 'horizontal' : 'vertical';
+                }
+
+                function puedeColocarBarco(x, y, tamano, direccion) {
+                    if (direccion === 'horizontal') {
+                        for (let i = x; i < x + tamano; i++) {
+                            if (i >= tamanoTablero || tablero[y][i] !== 0) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        for (let i = y; i < y + tamano; i++) {
+                            if (i >= tamanoTablero || tablero[i][x] !== 0) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+
+                function colocarBarco(x, y, tamano, direccion) {
+                    if (direccion === 'horizontal') {
+                        for (let i = x; i < x + tamano; i++) {
+                            tablero[y][i] = tamano;
+                        }
+                    } else {
+                        for (let i = y; i < y + tamano; i++) {
+                            tablero[i][x] = tamano;
+                        }
+                    }
+                }
+
+                function dibujarTablero() {
+                    const tableroElemento = document.getElementById('tablero');
+                    for (let y = 0; y < tamanoTablero; y++) {
+                        for (let x = 0; x < tamanoTablero; x++) {
+                            const celda = document.createElement('div');
+                            celda.classList.add('celda');
+                            if (tablero[y][x] > 0) {
+                                celda.classList.add('barco');
+                            }
+                            tableroElemento.appendChild(celda);
+                        }
+                    }
+                }
+                function cuadrosAdyacentesLibres(x, y, tamano, direccion) {
+                    const adyacentes = [];
+
+                    for (let i = -1; i <= tamano; i++) {
+                        for (let j = -1; j <= 1; j++) {
+                            let row, col;
+
+                            if (direccion === 'horizontal') {
+                                row = y + j;
+                                col = x + i;
+                            } else {
+                                row = y + i;
+                                col = x + j;
+                            }
+
+                            if (row >= 0 && row < tamanoTablero && col >= 0 && col < tamanoTablero) {
+                                if (tablero[row][col] !== 0) {
+                                    return false; // Cuadro adyacente ocupado
+                                }
+                            }
+                        }
+                    }
+
+                    return true; // Todos los cuadros adyacentes están libres
+                }
+
+                function colocarBarcos() {
+                    for (const tamano of tamanosBarcos) {
+                        let x, y, direccion;
+                        do {
+                            x = Math.floor(Math.random() * tamanoTablero);
+                            y = Math.floor(Math.random() * tamanoTablero);
+                            direccion = obtenerDireccionAleatoria();
+                        } while (!cuadrosAdyacentesLibres(x, y, tamano, direccion));
+
+                        colocarBarco(x, y, tamano, direccion);
+                    }
+                }
+
+                colocarBarcos();
+                dibujarTablero();
+            </script>
+
+        </main>
+        <footer>
+            <p><a href="../index.html">Oscar Pascual Ferrero</a></p>
+            <p><a href="../indexProyectoDWEC.php">Inicio</a> | <a href="https://github.com/discreppo"
+                    target="_blank">GitHub</a></p>
+        </footer>
+    </body>
+
+    </html>
