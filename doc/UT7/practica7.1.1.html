@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <title>Cargar Texto</title>
+</head>
+
+<body>
+    <h2>Nombre del archivo: archivo.txt</h2>
+    <div class="container">
+        <input type="text" id="fileNameInput" placeholder="Nombre del archivo.txt">
+        <button onclick="cargarTexto()">Cargar texto</button>
+        <div id="contentContainer" class="hidden">
+            <button onclick="cerrarContenedor()">Cerrar</button>
+            <pre id="fileContent"></pre>
+        </div>
+    </div>
+    <script>
+        async function cargarTexto() {
+            const fileName = document.getElementById('fileNameInput').value;
+
+            try {
+                const contenido = await obtenerContenidoTexto(fileName);
+                mostrarContenido(contenido);
+            } catch (error) {
+                mostrarError(error);
+            }
+        }
+
+        async function obtenerContenidoTexto(fileName) {
+            try {
+                const response = await fetch(fileName);
+
+                if (!response.ok) {
+                    throw new Error(`Error al cargar el archivo: ${response.statusText}`);
+                }
+
+                return await response.text();
+            } catch (error) {
+                throw new Error('Error de red');
+            }
+        }
+
+        function mostrarContenido(contenido) {
+            const contentContainer = document.getElementById('contentContainer');
+            const fileContent = document.getElementById('fileContent');
+
+            fileContent.innerHTML = contenido;
+
+            contentContainer.style.color = 'blue'; // Cambia el color del texto
+            contentContainer.style.fontFamily = 'Arial, sans-serif'; // Cambia la fuente del texto
+
+            contentContainer.classList.remove('hidden');
+        }
+
+        function cerrarContenedor() {
+            const contentContainer = document.getElementById('contentContainer');
+            contentContainer.classList.add('hidden');
+        }
+
+        function mostrarError(error) {
+            alert(error);
+        }
+
+    </script>
+</body>
+
+</html>
