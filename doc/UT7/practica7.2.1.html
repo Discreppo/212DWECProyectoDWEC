@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+        }
+
+        input[type="text"].valid {
+            border: 1px solid #00cc00;
+        }
+
+        input[type="text"].invalid {
+            border: 1px solid #ff0000;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #message {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #00cc00;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        #message:hover {
+            cursor: pointer;
+        }
+    </style>
+        <title>Validación de Formulario</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <form id="formulario">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="invalid" minlength="2">
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" class="invalid" minlength="2">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" class="invalid" pattern="[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+">
+                </div>
+                <div class="form-group">
+                    <label for="nif">NIF:</label>
+                    <input type="text" id="nif" name="nif" class="invalid" pattern="[0-9]{8}[A-Za-z]">
+                </div>
+                <button id="comprobar" type="button" disabled>Comprobar</button>
+            </form>
+            <div id="message"></div>
+        </div>
+
+        <script>
+            const nombreInput = document.getElementById('nombre');
+            const apellidosInput = document.getElementById('apellidos');
+            const emailInput = document.getElementById('email');
+            const nifInput = document.getElementById('nif');
+            const comprobarButton = document.getElementById('comprobar');
+            const messageDiv = document.getElementById('message');
+
+            nombreInput.addEventListener('input', validarNombre);
+            apellidosInput.addEventListener('input', validarApellidos);
+            emailInput.addEventListener('input', validarEmail);
+            nifInput.addEventListener('input', validarNIF);
+            comprobarButton.addEventListener('click', comprobarFormulario);
+            messageDiv.addEventListener('click', reiniciarFormulario);
+
+            function validarNombre() {
+                if (nombreInput.value.length >= 2) {
+                    nombreInput.classList.remove('invalid');
+                    nombreInput.classList.add('valid');
+                } else {
+                    nombreInput.classList.remove('valid');
+                    nombreInput.classList.add('invalid');
+                }
+                validarFormulario();
+            }
+
+            function validarApellidos() {
+                if (apellidosInput.value.length >= 2) {
+                    apellidosInput.classList.remove('invalid');
+                    apellidosInput.classList.add('valid');
+                } else {
+                    apellidosInput.classList.remove('valid');
+                    apellidosInput.classList.add('invalid');
+                }
+                validarFormulario();
+            }
+
+            function validarEmail() {
+                const emailRegex = /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+                if (emailRegex.test(emailInput.value)) {
+                    emailInput.classList.remove('invalid');
+                    emailInput.classList.add('valid');
+                } else {
+                    emailInput.classList.remove('valid');
+                    emailInput.classList.add('invalid');
+                }
+                validarFormulario();
+            }
+
+            function validarNIF() {
+                const nifRegex = /^[0-9]{8}[A-Za-z]$/;
+                if (nifRegex.test(nifInput.value)) {
+                    nifInput.classList.remove('invalid');
+                    nifInput.classList.add('valid');
+                } else {
+                    nifInput.classList.remove('valid');
+                    nifInput.classList.add('invalid');
+                }
+                validarFormulario();
+            }
+
+            function validarFormulario() {
+                if (nombreInput.classList.contains('valid') &&
+                        apellidosInput.classList.contains('valid') &&
+                        emailInput.classList.contains('valid') &&
+                        nifInput.classList.contains('valid')) {
+                    comprobarButton.disabled = false;
+                } else {
+                    comprobarButton.disabled = true;
+                }
+            }
+
+            function comprobarFormulario() {
+                messageDiv.textContent = "¡Todo es correcto!";
+                messageDiv.style.display = "block";
+                comprobarButton.disabled = true;
+            }
+
+            function reiniciarFormulario() {
+                messageDiv.style.display = "none";
+                comprobarButton.disabled = true;
+                nombreInput.value = '';
+                apellidosInput.value = '';
+                emailInput.value = '';
+                nifInput.value = '';
+                nombreInput.classList.remove('valid');
+                apellidosInput.classList.remove('valid');
+                emailInput.classList.remove('valid');
+                nifInput.classList.remove('valid');
+                nombreInput.classList.add('invalid');
+                apellidosInput.classList.add('invalid');
+                emailInput.classList.add('invalid');
+                nifInput.classList.add('invalid');
+            }
+        </script>
+    </body>
+</html>

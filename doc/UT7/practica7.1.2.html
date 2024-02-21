@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <title>Cargar Catálogo</title>
+</head>
+
+<body>
+    <div class="container">
+        <button onclick="cargarCatalogo()">Cargar catálogo</button>
+        <select id="dropdown" onchange="agregarColumna()">            
+            <option value="#">Selecciona...</option>
+            <option value="pais">País</option>
+            <option value="discografica">Discográfica</option>
+            <option value="anyo">Año</option>
+        </select>
+        <table id="tabla" class="hidden">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Artista</th>
+                </tr>
+            </thead>
+            <tbody id="tablaBody"></tbody>
+        </table>
+    </div>
+    <script>
+        let discos;
+        async function cargarCatalogo() {
+            try {
+                const response = await fetch('./cd_catalog.xml');
+                const xmlDoc = await response.text();
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xmlDoc, 'application/xml');
+
+                discos = doc.querySelectorAll('CD');
+                
+                mostrarTabla(doc);
+            } catch (error) {
+                mostrarError(error);
+            }
+        }
+
+        function mostrarTabla(xmlDoc) {
+            const tabla = document.getElementById('tabla');
+            const tablaBody = document.getElementById('tablaBody');
+
+            // Limpiar la tabla si ya había información previa
+            tablaBody.innerHTML = '';
+
+            const discos = xmlDoc.querySelectorAll('CD');
+            console.log(discos);
+            discos.forEach((disco) => {
+                const titulo = disco.querySelector('TITLE').textContent;
+                const artista = disco.querySelector('ARTIST').textContent;
+
+                const fila = document.createElement('tr');
+                const celdaTitulo = document.createElement('td');
+                const celdaArtista = document.createElement('td');
+
+                celdaTitulo.textContent = titulo;
+                celdaArtista.textContent = artista;
+
+                fila.appendChild(celdaTitulo);
+                fila.appendChild(celdaArtista);
+
+                tablaBody.appendChild(fila);
+            });
+
+            tabla.classList.remove('hidden');
+        }
+
+        function agregarColumna() {
+            const dropdown = document.getElementById('dropdown');
+            const selectedValue = dropdown.value;
+
+            const tabla = document.getElementById('tabla');
+            const tablaHead = tabla.querySelector('thead tr');
+
+            // Comprobar si la columna ya existe
+            if (tablaHead.querySelector(`th.${selectedValue}`)) {
+                return;
+            }
+
+            const nuevaColumna = document.createElement('th');
+            nuevaColumna.classList.add(selectedValue);
+            nuevaColumna.textContent = selectedValue.charAt(0).toUpperCase() + selectedValue.slice(1);
+
+            tablaHead.appendChild(nuevaColumna);
+
+            const tablaBody = document.getElementById('tablaBody');
+            const filas = tablaBody.querySelectorAll('tr');
+
+            filas.forEach((fila, index) => {
+                const nuevoDato = document.createElement('td');
+                nuevoDato.textContent = obtenerDatoColumna(selectedValue, index);
+                fila.appendChild(nuevoDato);
+            });
+        }
+
+        function obtenerDatoColumna(columna, index) {   
+            const disco = discos[index];
+            
+            switch (columna) {
+                case 'pais':
+                    return disco.querySelector('COUNTRY').textContent;
+                case 'discografica':
+                    return disco.querySelector('COMPANY').textContent;
+                case 'anyo':
+                    return disco.querySelector('YEAR').textContent;
+                default:
+                    return '';
+            }
+        }
+
+        function mostrarError(error) {
+            alert(error);
+        }
+
+    </script>
+</body>
+
+</html>

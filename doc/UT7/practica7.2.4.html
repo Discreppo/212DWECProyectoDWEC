@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+            #mapaImg {
+                width: 600px;
+                height: 1000px;
+                rotate: 90deg;
+            }
+        </style>
+        <title>Mapa Meteorológico AEMET</title>
+    </head>
+    <body>
+        <div id="formulario">
+            <label for="apikey">Introduce tu API Key de AEMET:</label>
+            <input type="text" id="apikey" placeholder="API Key" value="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXNjcmVwcG9kZWRhd0BnbWFpbC5jb20iLCJqdGkiOiJhMGRmOWRmOS03NzVjLTRiNDYtYTJjZS0zMjkzMzllYzYwNDMiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTcwODUxNTU1MSwidXNlcklkIjoiYTBkZjlkZjktNzc1Yy00YjQ2LWEyY2UtMzI5MzM5ZWM2MDQzIiwicm9sZSI6IiJ9.sFEfL8MNI17rGnrWlM7_w6Z_FADV7TYcbslQY_-qFJ4">
+            <button onclick="cargarMapa()">Cargar mapa</button>
+        </div>
+
+        <div id="mapa" style="display: none;">
+            <img id="mapaImg" src="" alt="Mapa meteorológico">
+        </div>
+
+        <script>
+            async function cargarMapa() {
+                const apiKey = document.getElementById('apikey').value;
+                const url = `https://opendata.aemet.es/opendata/api/mapasygraficos/analisis?api_key=${apiKey}`;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    const mapaUrl = data.datos;
+
+                    if (mapaUrl) {
+                        mostrarMapa(mapaUrl);
+                    } else {
+                        console.error('No se encontró la URL del mapa en la respuesta.');
+                    }
+                } catch (error) {
+                    console.error('Error al cargar el mapa:', error);
+                }
+            }
+
+            function mostrarMapa(imgUrl) {
+                const formulario = document.getElementById('formulario');
+                const mapaDiv = document.getElementById('mapa');
+                const mapaImg = document.getElementById('mapaImg');
+
+                formulario.style.display = 'none';
+                mapaDiv.style.display = 'block';
+                mapaImg.src = imgUrl;
+            }
+        </script>
+    </body>
+</html>

@@ -18,6 +18,7 @@
             <p><a href="codigoPHP/indexTema4.php">TEMA 4: OBJETOS</a></p>
             <p><a href="codigoPHP/indexTema5.php">TEMA 5: BOM Y DOM</a> </p>
             <p><a href="codigoPHP/indexTema6.php">TEMA 6: EVENTOS</a> </p>
+            <p><a href="codigoPHP/indexTema7.php">TEMA 7: ASINCRONIA</a> </p>
 
         <footer>
             <p><a href="../index.html">Oscar Pascual Ferrero</a></p>

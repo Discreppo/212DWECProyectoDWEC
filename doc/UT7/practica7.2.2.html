@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Usuario Aleatorio</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .user-card {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                text-align: center;
+            }
+
+            .user-card img {
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            .user-card p {
+                margin: 5px 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="user-card" id="user-card">
+            <h2>Cargando...</h2>
+        </div>
+
+        <script>
+            async function obtenerUsuarioAleatorio() {
+                try {
+                    const response = await fetch('https://randomuser.me/api/');
+                    const data = await response.json();
+                    const user = data.results[0]; // Obtenemos el primer usuario aleatorio de la lista
+
+                    mostrarUsuario(user);
+                } catch (error) {
+                    console.error('Error al obtener el usuario aleatorio:', error);
+                }
+            }
+
+            function mostrarUsuario(user) {
+                const userCard = document.getElementById('user-card');
+                userCard.innerHTML = `
+                    <img src="${user.picture.large}" alt="Foto de ${user.name.first} ${user.name.last}">
+                    <p><strong>Nombre:</strong> ${user.name.first} ${user.name.last}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>Dirección:</strong> ${user.location.street.name}, ${user.location.street.number}</p>
+                    <p><strong>Estado:</strong> ${user.location.state}</p>
+                `;
+            }
+
+            // Cargar un usuario aleatorio al cargar la página
+            window.addEventListener('load', obtenerUsuarioAleatorio);
+        </script>
+    </body>
+
+</html>
